@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using static Interop;
+using static Interop.Ole32;
 using static Interop.UxTheme;
 
 namespace System.Windows.Forms
