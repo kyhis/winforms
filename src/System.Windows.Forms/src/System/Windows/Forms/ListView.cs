@@ -2548,7 +2548,7 @@ namespace System.Windows.Forms
         {
             if (!RecreatingHandle)
             {
-                IntPtr userCookie = ThemingScope.Activate();
+                IntPtr userCookie = ThemingScope.Activate(Application.UseVisualStyles);
 
                 try
                 {
@@ -3284,7 +3284,7 @@ namespace System.Windows.Forms
             }
             else
             {
-                fixed (char *pText = text)
+                fixed (char* pText = text)
                 {
                     var lvFindInfo = new ComCtl32.LVFINDINFOW();
                     if (isTextSearch)
@@ -3310,7 +3310,7 @@ namespace System.Windows.Forms
                     {
                         return Items[index];
                     }
-                    
+
                     if (isTextSearch && includeSubItemsInSearch)
                     {
                         // win32 listView control can't search inside sub items
@@ -3330,7 +3330,7 @@ namespace System.Windows.Forms
                                 {
                                     return lvi;
                                 }
-                                
+
                                 if (isPrefixSearch && CultureInfo.CurrentCulture.CompareInfo.IsPrefix(lvsi.Text, text, CompareOptions.IgnoreCase))
                                 {
                                     return lvi;
@@ -3340,7 +3340,7 @@ namespace System.Windows.Forms
 
                         return null;
                     }
-                    
+
                     return null;
                 }
             }
