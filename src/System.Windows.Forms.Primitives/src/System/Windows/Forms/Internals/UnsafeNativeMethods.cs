@@ -2,16 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Accessibility;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
-using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 using static Interop;
+using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 namespace System.Windows.Forms
 {
@@ -188,6 +186,9 @@ namespace System.Windows.Forms
         [DllImport(ExternDll.User32, CharSet = CharSet.Auto)]
         public extern static IntPtr SendDlgItemMessage(HandleRef hDlg, int nIDDlgItem, int Msg, IntPtr wParam, IntPtr lParam);
 
+        [DllImport(ExternDll.User32, CharSet = CharSet.Auto)]
+        public extern static IntPtr SendDlgItemMessage(IntPtr hDlg, int nIDDlgItem, int Msg, IntPtr wParam, IntPtr lParam);
+
         [DllImport(ExternDll.Comdlg32, SetLastError = true, CharSet = CharSet.Auto)]
         public static extern bool GetSaveFileName([In, Out] NativeMethods.OPENFILENAME_I ofn);
 
@@ -337,6 +338,12 @@ namespace System.Windows.Forms
 
         [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern IntPtr GetDlgItem(HandleRef hWnd, int nIDDlgItem);
+
+        [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr GetDlgItem(IntPtr hWnd, int nIDDlgItem);
+
+        [DllImport(ExternDll.User32, ExactSpelling = true, CharSet = CharSet.Auto)]
+        public static extern int GetDlgItemInt(IntPtr hWnd, int nIDDlgItem, bool[] err, bool signed);
 
         [DllImport(ExternDll.User32, CharSet = CharSet.Auto)]
         public static extern IntPtr DefMDIChildProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
@@ -789,7 +796,7 @@ namespace System.Windows.Forms
 
             [PreserveSig]
             HRESULT SetExtent(
-                Ole32.DVASPECT dwDrawAspect, 
+                Ole32.DVASPECT dwDrawAspect,
                 Size* pSizel);
 
             [PreserveSig]
