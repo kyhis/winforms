@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Windows.Forms.Primitives.Resources;
 
 internal static partial class Interop
 {
@@ -131,14 +132,14 @@ internal static partial class Interop
                     case VARENUM.R8:
 
                         // can I use unsafe here?
-                        throw new FormatException("SR.CannotConvertIntToFloat");
+                        throw new FormatException(SR.CannotConvertIntToFloat);
 
                     case VARENUM.CY:
                         // internally currency is 8-byte int scaled by 10,000
                         longVal = ((uint)data1 & 0xffffffff) | ((uint)data2 << 32);
                         return new decimal(longVal);
                     case VARENUM.DATE:
-                        throw new FormatException("SR.CannotConvertDoubleToDate");
+                        throw new FormatException(SR.CannotConvertDoubleToDate);
 
                     case VARENUM.BSTR:
                     case VARENUM.LPWSTR:
@@ -176,7 +177,7 @@ internal static partial class Interop
                         return new DateTime(longVal);
 
                     case VARENUM.USERDEFINED:
-                        throw new ArgumentException("string.Format(SR.COM2UnhandledVT, \"USERDEFINED\")");
+                        throw new ArgumentException(string.Format(SR.COM2UnhandledVT, "USERDEFINED"));
 
                     case VARENUM.ARRAY:
                     case VARENUM.VOID:
